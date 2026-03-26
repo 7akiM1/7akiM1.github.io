@@ -33,7 +33,7 @@
 
         /* --- 3. القسم الرئيسي --- */
         #hero {
-            height: 50vh;
+            height: 40vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -44,61 +44,35 @@
             margin-top: 60px;
         }
         #hero h1 { font-size: 3rem; color: #000; margin-bottom: 10px; }
-        #hero p { font-size: 1.2rem; color: #666; }
 
-        /* --- 4. الخانات (مكعبات الزهر) --- */
+        /* --- 4. الخانات (6 مكعبات زهر) --- */
         .services { padding: 60px 10%; background: #ffffff; text-align: center; }
         .cards-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
         .card {
             background: #ffffff;
             border: 1px solid #eee;
-            padding: 50px 20px;
-            border-radius: 15px;
+            padding: 60px 20px;
+            border-radius: 20px;
             text-decoration: none;
             color: inherit;
             display: block;
-            box-shadow: 8px 8px 20px #d1d9e6, -8px -8px 20px #ffffff;
-            transition: 0.3s;
+            /* تصميم مكعب الزهر */
+            box-shadow: 10px 10px 25px #d1d9e6, -10px -10px 25px #ffffff;
+            transition: all 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 12px 12px 25px #c2ccd8, -12px -12px 25px #ffffff;
+            transform: scale(1.05);
+            box-shadow: 15px 15px 35px #c2ccd8, -15px -15px 35px #ffffff;
             border-color: #00d2ff;
         }
-        .card h3 { color: #00d2ff; margin-bottom: 10px; font-size: 1.5rem; }
+        .card h3 { color: #00d2ff; margin-bottom: 10px; font-size: 1.6rem; }
 
-        /* --- 5. النموذج --- */
-        #contact { padding: 60px 10%; background: #f1f3f5; text-align: center; }
-        .contact-form {
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: right;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
-        .btn-submit {
-            background: #d35400;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 100%;
-        }
-
-        footer { padding: 30px; background: #000; color: white; text-align: center; }
+        footer { padding: 40px; background: #000; color: white; text-align: center; }
     </style>
 </head>
 <body>
@@ -108,40 +82,40 @@
         <ul>
             <li><a href="#hero">مثال</a></li>
             <li><a href="#about">مثال</a></li>
-            <li><a href="#contact">مثال</a></li>
         </ul>
     </nav>
 
     <section id="hero">
         <h1>مثال</h1>
-        <p>مثال</p>
     </section>
 
     <section id="about" class="services">
         <h2>مثال</h2>
         <div class="cards-container">
-            <a href="#contact" class="card">
-                <h3>مثال</h3>
+            <a href="https://google.com" target="_blank" class="card">
+                <h3>مثال 1</h3>
                 <p>مثال</p>
             </a>
-            <a href="#contact" class="card">
-                <h3>مثال</h3>
+            <a href="https://bing.com" target="_blank" class="card">
+                <h3>مثال 2</h3>
                 <p>مثال</p>
             </a>
-            <a href="#contact" class="card">
-                <h3>مثال</h3>
+            <a href="https://youtube.com" target="_blank" class="card">
+                <h3>مثال 3</h3>
                 <p>مثال</p>
             </a>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>مثال</h2>
-        <div class="contact-form">
-            <input type="text" placeholder="مثال">
-            <input type="email" placeholder="مثال">
-            <textarea rows="4" placeholder="مثال"></textarea>
-            <button class="btn-submit">مثال</button>
+            <a href="https://github.com" target="_blank" class="card">
+                <h3>مثال 4</h3>
+                <p>مثال</p>
+            </a>
+            <a href="https://wikipedia.org" target="_blank" class="card">
+                <h3>مثال 5</h3>
+                <p>مثال</p>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="card">
+                <h3>مثال 6</h3>
+                <p>مثال</p>
+            </a>
         </div>
     </section>
 
