@@ -1,49 +1,189 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجري الرسمي - 7akiM1</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; margin: 0; padding: 20px; }
-        .product { background: white; border-radius: 10px; padding: 20px; margin: 10px auto; max-width: 300px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        img { max-width: 100%; border-radius: 8px; }
-        .price { color: #27ae60; font-weight: bold; font-size: 1.2em; }
-        button { background-color: #25d366; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1em; }
-        button:hover { background-color: #128c7e; }
-        footer { margin-top: 50px; color: #777; font-size: 0.9em; }
-    </style>
-</head>
-<body>
+    /* --- 2. الألوان المميزة (Special Colors) --- */
+    :root {
+        --neon-blue: #00d2ff;
+        --neon-purple: #9d00ff;
+        --ixone-orange: #d35400; /* لمسة من ixONE */
+    }
 
-    <header>
-        <h1>مرحباً بك في متجري</h1>
-        <p>أفضل المنتجات بأسعار مميزة</p>
-    </header>
+    /* --- 3. تصميم البار العلوي (Navbar - اختياري) --- */
+    nav {
+        background-color: rgba(3, 0, 20, 0.8);
+        backdrop-filter: blur(5px);
+        padding: 10px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        width: 90%;
+        z-index: 1000;
+    }
+    nav .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--neon-blue);
+        text-shadow: 0 0 10px var(--neon-blue);
+    }
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+    }
+    nav a {
+        text-decoration: none;
+        color: white;
+        transition: color 0.3s;
+    }
+    nav a:hover {
+        color: var(--neon-purple);
+    }
 
-    <section class="products">
-        <h2>منتجاتي</h2>
+    /* --- 4. الأقسام الرئيسية (Sections) --- */
+    section {
+        padding: 100px 20px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+    }
 
-        <div class="product">
-            <img src="https://via.placeholder.com/300x200?text=Product+1" alt="منتج 1">
-            <h3>اسم المنتج 1</h3>
-            <p class="price">99 ريال</p>
-            <button onclick="window.open('https://wa.me/966XXXXXXXXX', '_blank')">اطلب عبر واتساب</button>
-        </div>
+    h1, h2, h3 {
+        font-family: 'Arial Black', sans-serif;
+        text-transform: uppercase;
+    }
 
-        <div class="product">
-            <img src="https://via.placeholder.com/300x200?text=Product+2" alt="منتج 2">
-            <h3>اسم المنتج 2</h3>
-            <p class="price">150 ريال</p>
-            <button onclick="window.open('https://wa.me/4917624692071', '_blank')">اطلب الآن</button>
-        </div>
+    h2 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(to left, var(--neon-blue), var(--neon-purple));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 15px rgba(157, 0, 255, 0.5);
+    }
 
-    </section>
+    /* --- 5. قسم البداية (Hero Section) --- */
+    #hero {
+        /* استخدم صورة خلفية فضائية حقيقية من رابط (أو ارفع صورتك) */
+        background-image: linear-gradient(rgba(0,0,0,0.6), rgba(3,0,20,1)),
+                          url('https://images.unsplash.com/photo-1543722530-d2c3201371e7?q=80&w=2000&auto=format&fit=crop'); 
+        background-size: cover;
+        background-position: center;
+    }
+    #hero h1 {
+        font-size: 4rem;
+        margin-bottom: 10px;
+    }
+    #hero p {
+        font-size: 1.5rem;
+        max-width: 700px;
+        margin-bottom: 30px;
+        color: #ddd;
+    }
 
-    <footer>
-        <p>تواصل معي: 0XXXXXXXXX</p>
-        <p>&copy; 2024 - جميع الحقوق محفوظة لـ 7akiM1</p>
-    </footer>
+    /* --- 6. الأزرار (Buttons - استايل ixONE) --- */
+    .btn-orange {
+        display: inline-block;
+        padding: 15px 40px;
+        background-color: var(--ixone-orange);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        box-shadow: 0 5px 20px rgba(211, 84, 0, 0.6);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-orange:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(211, 84, 0, 0.8);
+    }
 
-</body>
-</html>
+    /* --- 7. قسم عني/البطاقات العائمة (About/Cards) --- */
+    #about .cards-container {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        width: 100%;
+    }
+    #about .card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 30px;
+        width: calc(33.33% - 60px);
+        min-width: 280px;
+        box-shadow: 0 0 20px rgba(157, 0, 255, 0.1);
+        transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        text-align: right; /* عشان المحتوى عربي */
+    }
+    #about .card:hover {
+        transform: translateY(-10px) rotate(2deg);
+        border-color: var(--neon-purple);
+        box-shadow: 0 0 30px rgba(157, 0, 255, 0.3);
+    }
+    #about .card h3 {
+        color: var(--neon-blue);
+        margin-top: 0;
+    }
+
+    /* --- 8. قسم الأسئلة الشائعة (FAQ - ستايل ixONE معدل) --- */
+    #faq .faq-container {
+        max-width: 800px;
+        width: 100%;
+        text-align: right;
+    }
+    details {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 15px 0;
+    }
+    summary {
+        font-weight: bold;
+        font-size: 1.2rem;
+        cursor: pointer;
+        list-style: none; /* إخفاء المثلث الافتراضي */
+        position: relative;
+        padding-right: 30px;
+    }
+    /* أيقونة (+) المخصصة */
+    summary::before {
+        content: '+';
+        position: absolute;
+        right: 0;
+        color: var(--ixone-orange);
+        font-size: 1.5rem;
+        font-weight: bold;
+        transition: transform 0.3s;
+    }
+    details[open] summary::before {
+        transform: rotate(45deg); /* تحويل + إلى x عند الفتح */
+    }
+    details p {
+        color: #ccc;
+        padding-top: 10px;
+        padding-right: 30px;
+    }
+
+    /* --- 9. قسم المعلومات القانونية (Impressum) --- */
+    footer {
+        background-color: #010008;
+        padding: 20px;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    footer a {
+        color: #ccc;
+        text-decoration: none;
+    }
+    footer a:hover {
+        color: white;
+    }
+</style>
