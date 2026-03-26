@@ -2,19 +2,127 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>قائمة المشروبات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7akim Kiosk | المشروبات الباردة 🥤</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; background: #fffbe6; }
-        .back-btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #000; color: #fff; text-decoration: none; border-radius: 5px; }
+        /* --- الأساسيات المتناسقة مع الرئيسية --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #ffffff; 
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- البار العلوي (نفس اللون والشعار) --- */
+        nav {
+            background: #000;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 20px; font-weight: bold; color: #ffcc00; }
+        .back-btn {
+            text-decoration: none;
+            color: #000;
+            background: #ffcc00;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { background: #fff; }
+
+        /* --- قسم العنوان الفرعي --- */
+        #page-title {
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: #fffbe6;
+            margin-top: 50px;
+        }
+        #page-title h1 { font-size: 2.5rem; color: #000; margin: 0; }
+
+        /* --- قائمة المنتجات (نفس المكعبات) --- */
+        .product-list { padding: 40px 10%; text-align: center; }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .card {
+            background: #ffffff;
+            border: 1px solid #eee;
+            padding: 30px 15px;
+            border-radius: 15px;
+            box-shadow: 8px 8px 20px #d1d9e6, -8px -8px 20px #ffffff;
+            transition: 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); border-color: #ffcc00; }
+        
+        .card-emoji { font-size: 3rem; margin-bottom: 10px; }
+        .card-title { font-size: 1.4rem; color: #d35400; margin-bottom: 5px; font-weight: bold; }
+        .card-title-de { color: #888; font-size: 0.9rem; font-weight: bold; }
+        .card-price { font-size: 1.5rem; color: #000; font-weight: 900; margin-top: 10px; }
+
+        /* --- الفوتر المتناسق --- */
+        footer { padding: 30px; background: #000; color: white; text-align: center; margin-top: 40px; }
+        footer p { margin: 5px 0; font-size: 14px; opacity: 0.8; }
     </style>
 </head>
 <body>
-    <h1>🥤 قائمة المشروبات الباردة</h1>
-    <ul style="list-style: none; font-size: 1.5rem;">
-        <li>كولا - 2.50€</li>
-        <li>فانتا - 2.50€</li>
-        <li>مياه معدنية - 1.50€</li>
-    </ul>
-    <a href="index.html" class="back-btn">العودة للرئيسية</a>
+
+    <nav>
+        <div class="logo">7akim Kiosk 🏪</div>
+        <a href="index.html" class="back-btn">← العودة للرئيسية</a>
+    </nav>
+
+    <section id="page-title">
+        <h1>🥤 المشروبات الباردة | Kalte Getränke</h1>
+    </section>
+
+    <section class="product-list">
+        <h2>قائمة المشروبات | Getränkekarte</h2>
+        <div class="cards-container">
+            <div class="card">
+                <div class="card-emoji">🥤</div>
+                <div class="card-title">كوكاكولا</div>
+                <div class="card-title-de">Coca-Cola (0.33l)</div>
+                <div class="card-price">2.50 €</div>
+            }
+            <div class="card">
+                <div class="card-emoji">💧</div>
+                <div class="card-title">مياه معدنية</div>
+                <div class="card-title-de">Mineralwasser (0.5l)</div>
+                <div class="card-price">1.50 €</div>
+            }
+            <div class="card">
+                <div class="card-emoji">🍊</div>
+                <div class="card-title">فانتا البرتقال</div>
+                <div class="card-title-de">Fanta Orange (0.33l)</div>
+                <div class="card-price">2.50 €</div>
+            }
+            <div class="card">
+                <div class="card-emoji">🍎</div>
+                <div class="card-title">عصير تفاح</div>
+                <div class="card-title-de">Apfelschorle (0.5l)</div>
+                <div class="card-price">2.80 €</div>
+            }
+        </div>
+    </section>
+
+    <footer>
+        <p>7akim Kiosk - Regensburg</p>
+        <p>© 2026 جميع الحقوق محفوظة لـ حكيم</p>
+    </footer>
+
 </body>
 </html>
