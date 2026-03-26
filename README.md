@@ -26,7 +26,7 @@
             <img src="https://via.placeholder.com/300x200?text=منتج+2" alt="منتج 2">
             <h3>اسم المنتج 2</h3>
             <p class="price">١٩٩ ريال</p>
-            <button onclick="window.open('https://wa.me/رقمك', '_blank')">اطلب عبر واتساب</button>
+            <button onclick="window.open('https://wa.me/+4917624692071', '_blank')">اطلب عبر واتساب</button>
         </div>
 
         <!-- أضف المزيد من المنتجات بنفس الطريقة -->
