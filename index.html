@@ -3,134 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>7akim | Digital Hub</title>
+    <title>7akim | Mountain Digital</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
+        /* Import bold and modern fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Oswald:wght@500;700&display=swap');
 
+        /* --- 1. Basic Setup & Cinematic Mountain Background --- */
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            background-color: #050505;
+            margin: 0; padding: 0;
+            font-family: 'Oswald', sans-serif;
+            background-color: #050505; /* Fallback color */
+            
+            /* Cinematic Mountain Background (Compressed for speed) */
+            background-image: 
+                linear-gradient(to bottom, rgba(5, 5, 5, 0.7), rgba(5, 5, 5, 0.9)),
+                url('https://images.unsplash.com/photo-1549880181-56a44cf4a9a1?q=80&w=2000');
+            
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect for depth */
             color: #ffffff;
             line-height: 1.6;
         }
 
-        /* Navigation */
+        /* --- 2. Minimalist Navigation --- */
         nav {
-            padding: 30px 10%;
+            padding: 30px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(5, 5, 5, 0.6);
+            backdrop-filter: blur(10px);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            color: #00ff88; /* Neon Green Highlight */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: #00ffff; /* Ice Cyan Highlight */
+            text-transform: uppercase;
         }
 
-        /* Hero Section */
+        /* --- 3. Hero Section (The Peak) --- */
         .hero {
-            height: 50vh;
+            height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 0 10%;
+            margin-top: 80px; /* Space for nav */
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
             margin: 0;
-            font-weight: 700;
-            letter-spacing: -2px;
+            font-weight: 900;
+            letter-spacing: -4px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.6);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #888;
+            font-size: 1.4rem;
+            color: #aaa;
             max-width: 600px;
+            margin-top: 15px;
+            font-weight: 400;
         }
 
-        /* Grid System */
+        /* --- 4. Container & Mountain-Inspired Boxes --- */
         .container {
-            padding: 50px 10%;
+            padding: 100px 8%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            background: rgba(5, 5, 5, 0.8);
         }
 
+        /* Decoration: Angled corners inspired by mountain peaks */
         .box {
-            background: #111;
-            padding: 40px;
-            border-radius: 12px;
-            border: 1px solid #222;
-            transition: 0.3s ease;
+            background: rgba(17, 17, 17, 0.8);
+            padding: 50px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: all 0.4s ease;
             cursor: pointer;
             text-decoration: none;
             color: white;
+            backdrop-filter: blur(5px);
+            
+            /* Mountain-like cut-out corners decoration */
+            clip-path: polygon(
+                20px 0, 
+                100% 0, 
+                100% calc(100% - 20px), 
+                calc(100% - 20px) 100%, 
+                0 100%, 
+                0 20px
+            );
         }
 
         .box:hover {
-            border-color: #00ff88;
-            background: #161616;
-            transform: translateY(-5px);
+            border-color: #00ffff;
+            background: rgba(17, 17, 17, 0.95);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.1);
         }
+
+        .box::after {
+            /* Ice Glow decoration at the bottom */
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px;
+            background: #00ffff; transition: 0.3s;
+        }
+        .box:hover::after { width: 100%; }
 
         .box h2 {
             margin-top: 0;
-            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            transition: 0.3s;
         }
+        .box:hover h2 { color: #00ffff; }
 
         .box p {
-            color: #666;
-            font-size: 0.9rem;
+            color: #888;
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 0;
+            transition: 0.3s;
         }
+        .box:hover p { color: #fff; }
 
+        /* --- 5. Footer --- */
         footer {
             text-align: center;
-            padding: 50px;
+            padding: 80px 10%;
             color: #444;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            background: #050505;
             border-top: 1px solid #111;
         }
+        footer p { margin: 5px 0; font-family: 'Inter', sans-serif; }
+        footer .copyright { color: #888; font-weight: bold; text-transform: uppercase; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">7AKIM.</div>
+        <div class="logo">7AKIM.⛰️</div>
     </nav>
 
-    <div class="hero">
-        <h1>Digital Excellence.</h1>
-        <p>Providing cutting-edge digital solutions in Regensburg and beyond.</p>
-    </div>
+    <section class="hero">
+        <h1>Reach The Peak.</h1>
+        <p>Your digital partner in Regensburg, delivering cutting-edge solutions for your brand's growth.</p>
+    </section>
 
-    <div class="container">
+    <section class="container">
         <a href="#" class="box">
             <h2>Web Design</h2>
-            <p>Creating immersive digital experiences with modern technology.</p>
+            <p>Immersive digital experiences. Crafted with modern code and cinematic vision.</p>
         </a>
         <a href="#" class="box">
             <h2>Development</h2>
-            <p>Building scalable and fast applications for the next generation.</p>
+            <p>Building scalable applications. Fast, secure, and ready for the future.</p>
         </a>
         <a href="#" class="box">
             <h2>Marketing</h2>
-            <p>Targeted strategies to grow your brand in a competitive market.</p>
+            <p>Targeted growth strategies. Dominating the digital landscape from above.</p>
         </a>
         <a href="#" class="box">
-            <h2>Cloud Hosting</h2>
-            <p>Secure and reliable infrastructure for your digital assets.</p>
+            <h2>Hosting</h2>
+            <p>Unshakable infrastructure. Safe, reliable, and powerful, like the rock itself.</p>
         </a>
-    </div>
+    </section>
 
     <footer>
-        &copy; 2026 7AKIM SPACE. ALL RIGHTS RESERVED.
+        <p>7AKIM SPACE - Regensburg, Germany</p>
+        <p>Global Digital Solutions from the Heart of Bavaria.</p>
+        <p class="copyright">© 2026 ALL RIGHTS RESERVED.</p>
     </footer>
 
 </body>
