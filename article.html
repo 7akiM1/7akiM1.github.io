@@ -143,6 +143,47 @@
 
         .info-card strong { color: var(--neon-blue); display: block; margin-bottom: 5px; }
 
+        /* معرض الصور */
+        .gallery {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            font-size: 1rem;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
         footer {
             text-align: center;
             padding: 100px 0;
@@ -204,6 +245,27 @@
         <p>
             هل تعلم أن ديريك هي أول منطقة في سوريا تستقبل خيوط الشمس كل صباح؟ وهل تعلم أنها المدينة الوحيدة التي يمكنك فيها الوقوف على تلة ورؤية جبال دولتين أخريين بوضوح تام؟ إنها مدينة التناقضات الجميلة، حيث تجد بساطة الريف وتطور الفكر الثقافي والسياسي في آن واحد.
         </p>
+
+        <h2>معرض الصور الأثرية</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="ancient-bridge.jpg" alt="الجسر الروماني">
+                <div class="overlay">الجسر الروماني الأثري في عين ديوار</div>
+            </div>
+            <div class="gallery-item">
+                <img src="old-church.jpg" alt="الكنيسة القديمة">
+                <div class="overlay">كنيسة سريانية قديمة في قلب ديريك</div>
+            </div>
+            <div class="gallery-item">
+                <img src="traditional-market.jpg" alt="السوق التقليدي">
+                <div class="overlay">السوق الشعبي التقليدي، نبض المدينة اليومي</div>
+            </div>
+            <div class="gallery-item">
+                <img src="landscape.jpg" alt="المناظر الطبيعية">
+                <div class="overlay">المناظر الطبيعية الخلابة المحيطة بديريك</div>
+            </div>
+        </div>
+
     </article>
 
     <footer>
