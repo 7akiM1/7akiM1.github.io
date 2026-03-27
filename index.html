@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DÊRK | أرشيف حضارة الشمس</title>
+    <title>DÊRK | حارسة الجسر والأرشيف الحي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+Arabic:wght@300;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+Arabic:wght@300;600;800&display=swap');
 
         :root {
             --primary-color: #00f2ff; /* لون النيون الفسفوري (الشهاب) */
             --bg-dark: #050505;
-            --card-bg: rgba(13, 13, 13, 0.9); /* خلفية نصف شفافة للخانات */
             --text-gray: #a0a0a0;
+            --card-overlay: rgba(0, 0, 0, 0.85); /* تظليل داكن جداً فوق الصور */
         }
 
         body {
@@ -20,17 +20,17 @@
             font-family: 'Noto Sans Arabic', sans-serif;
             margin: 0;
             overflow-x: hidden;
-            position: relative; /* ضروري لتساقط الثلج */
+            position: relative;
         }
 
-        /* --- تأثير تساقط الثلج (Background) --- */
+        /* --- تأثير تساقط الثلج (Fixed Background) --- */
         #snow-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* لكي لا يمنع الضغط على الأزرار */
+            pointer-events: none;
             z-index: 1; /* خلف المحتوى الأساسي */
         }
 
@@ -41,12 +41,12 @@
         }
 
         header {
-            padding: 40px 10%;
+            padding: 30px 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background-color: rgba(5, 5, 5, 0.8); /* هيدر شبه شفاف */
+            background-color: rgba(5, 5, 5, 0.9);
         }
 
         .logo {
@@ -56,12 +56,11 @@
             color: white;
             letter-spacing: 5px;
         }
-
         .logo span { color: var(--primary-color); }
 
         /* Hero Section */
         .hero {
-            height: 60vh;
+            height: 50vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -71,11 +70,11 @@
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 800;
             margin-bottom: 15px;
-            text-transform: uppercase;
             letter-spacing: 15px;
-            background: linear-gradient(to bottom, #fff, #666);
+            background: linear-gradient(to bottom, #fff, #444);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -85,55 +84,89 @@
             max-width: 700px;
             font-size: 1.2rem;
             line-height: 1.8;
+            font-weight: 300;
         }
 
         /* --- الخانات التفاعلية (The Grid) --- */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            padding: 80px 10%;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 60px 10%;
             background-color: var(--bg-dark);
         }
 
         .card {
-            background: var(--card-bg);
-            padding: 60px 45px;
             border-radius: 4px;
             position: relative;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid #1a1a1a;
-            text-decoration: none; /* لإزالة خط الرابط */
+            text-decoration: none;
             display: block;
-            overflow: hidden; /* ضروري لوميض الشهاب الداخلي */
+            overflow: hidden; /* ضروري لتأثير الشهاب وتكبير الصورة */
+            height: 350px; /* طول موحد للخانات */
         }
 
-        /* تأثير التمرير (Hover) */
+        /* --- خلفيات الصور عالية الدقة (مظللة) --- */
+        .card-bg-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+            z-index: -2; /* خلف التظليل والنص */
+        }
+
+        /* التظليل الداكن الثابت فوق الصورة */
+        .card-shadow {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--card-overlay);
+            z-index: -1; /* خلف النص */
+            transition: 0.5s;
+        }
+
+        /* --- تفاصيل تأثير التمرير (Hover) --- */
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             border-color: var(--primary-color);
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.1);
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.15);
         }
 
-        /* --- تأثير الوميض السحري (الشهاب) عند الضغط (Click) --- */
+        /* تكبير الصورة الخلفية عند التمرير */
+        .card:hover .card-bg-img {
+            transform: scale(1.1);
+        }
+
+        /* تخفيف التظليل قليلاً عند التمرير لإظهار الصورة */
+        .card:hover .card-shadow {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* --- تأثير الوميض السحري (الشهاب) عند الضغط --- */
         .card:active {
             animation: meteorFlash 0.5s ease-out;
         }
 
         @keyframes meteorFlash {
-            0% {
-                background-color: var(--card-bg);
-                box-shadow: 0 0 0px var(--primary-color);
-            }
+            0% { box-shadow: 0 0 0px var(--primary-color); }
             20% {
-                background-color: var(--primary-color); /* الوميض القوي */
-                box-shadow: 0 0 60px var(--primary-color);
+                background-color: var(--primary-color); /* الوميض يغمر الخانة */
+                box-shadow: 0 0 80px var(--primary-color);
             }
-            100% {
-                background-color: var(--card-bg);
-                box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
-            }
+            100% { box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
+        }
+
+        /* --- محتوى النص داخل الخانة --- */
+        .card-content {
+            position: relative;
+            padding: 60px 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* النص في الأسفل */
+            z-index: 2;
         }
 
         .card-number {
@@ -141,82 +174,50 @@
             top: 30px;
             right: 30px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
-            color: #1a1a1a;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.03); /* باهتة جداً */
             transition: 0.4s;
         }
 
         .card:hover .card-number {
-            color: rgba(0, 242, 255, 0.15);
+            color: rgba(0, 242, 255, 0.1);
         }
 
         .card-line {
             width: 50px;
             height: 3px;
             background: var(--primary-color);
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             transition: 0.4s;
         }
 
-        .card:hover .card-line {
-            width: 80px;
-        }
+        .card:hover .card-line { width: 80px; }
 
         .card h3 {
-            font-size: 2rem;
-            margin-bottom: 25px;
+            font-size: 2.2rem;
+            margin: 0 0 20px;
             color: #fff;
-            font-weight: 700;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .card p {
-            color: var(--text-silver);
-            line-height: 1.7;
-            font-size: 1rem;
-            font-weight: 300;
+            color: #d0d0d0; /* لون فاتح قليلاً ليظهر فوق الصورة */
+            line-height: 1.8;
+            font-size: 1.05rem;
+            font-weight: 400;
+            margin: 0;
         }
 
         /* Footer */
         footer {
-            padding: 100px 10% 60px;
+            padding: 80px 10% 50px;
             background: #000;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            border-top: 1px solid #1a1a1a;
-        }
-
-        .footer-sec h4 {
-            color: white;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .footer-sec p, .footer-sec a {
-            color: var(--text-gray);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 12px;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        .footer-sec a:hover {
-            color: var(--primary-color);
-            padding-right: 5px;
-        }
-
-        .copyright {
-            grid-column: 1 / -1;
             text-align: center;
-            margin-top: 80px;
-            color: #333;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-            font-family: 'Orbitron', sans-serif;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.9rem;
+            color: #444;
+            letter-spacing: 2px;
         }
 
     </style>
@@ -227,104 +228,90 @@
 
     <header>
         <div class="logo">DÊRK<span>.</span></div>
-        <div style="font-size: 0.8rem; letter-spacing: 3px; color: var(--text-gray); font-family: 'Orbitron';">HISTORY // ARCHIVE // 2026</div>
+        <div style="font-size: 0.75rem; letter-spacing: 3px; color: var(--text-gray); font-family: 'Orbitron';">HIGH ARCHIVE // TRIPLE BORDER</div>
     </header>
 
     <section class="hero">
-        <h1>كنز ميديا</h1>
-        <p>بوابة رقمية تفاعلية لاستكشاف أعماق التاريخ الكوردي، من حضارة جبال زاغروس المنشئة إلى فجر الحداثة. تدوين الذاكرة، حماية الهوية.</p>
+        <h1>دِيـرِيـك</h1>
+        <p>بوابة رقمية تفاعلية لاستكشاف أعماق "المثلث الذهبي"، حارسة نهر دجلة والذاكرة الحية لثلاث حدود. تدوين التاريخ، حماية الهوية.</p>
     </section>
 
     <div class="grid-container">
+        
         <a href="article.html" class="card">
-            <div class="card-number">01</div>
-            <div class="card-line"></div>
-            <h3>الممالك القديمة</h3>
-            <p>تحليل عميق لإمبراطورية ميديا والكيانات الأولى التي صاغت وجه الشرق القديم. استكشاف الأساطير والحقائق المدفونة.</p>
+            <div class="card-bg-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ea/Ain_Diwar_bridge_1.jpg');"></div>
+            <div class="card-shadow"></div>
+            
+            <div class="card-content">
+                <div class="card-number">01</div>
+                <div class="card-line"></div>
+                <h3>حارسة الجسر</h3>
+                <p>استكشاف "عين ديوار" والجسر الروماني الأثري الذي صمد لآلاف السنين كشاهد على عبور الحضارات وقوافل التاريخ.</p>
+            </div>
         </a>
 
         <a href="article.html" class="card">
-            <div class="card-number">02</div>
-            <div class="card-line"></div>
-            <h3>العصر الذهبي</h3>
-            <p>عندما أضاءت العقول الكوردية دروب الفلسفة، الطب، والفروسية. عصر القادة العظام والعلماء الذين غيروا مجرى التاريخ الإنساني.</p>
+            <div class="card-bg-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d4/Derik_church.jpg');"></div>
+            <div class="card-shadow"></div>
+            
+            <div class="card-content">
+                <div class="card-number">02</div>
+                <div class="card-line"></div>
+                <h3>نسيج العيش</h3>
+                <p>توثيق العيش المشترك الفريد بين الكورد، السريان، الأرمن، والعرب. ديريك هي لوحة فسيفسائية نادرة.</p>
+            </div>
         </a>
 
         <a href="article.html" class="card">
             <div class="card-number">03</div>
             <div class="card-line"></div>
-            <h3>المخطوطات الضائعة</h3>
-            <p>بحث في الأدب الكلاسيكي، الشعر الشفاهي، واللغة التي صمدت لآلاف السنين كحصن منيع للهوية الثقافية الكوردية.</p>
+            <h3>قلب دجلة</h3>
+            <p>تحليل الجغرافيا السياسية الفريدة للمدينة بصفتها النقطة التي تتعانق فيها حدود سوريا والعراق وتركيا.</p>
         </a>
 
         <a href="article.html" class="card">
             <div class="card-number">04</div>
             <div class="card-line"></div>
-            <h3>الهوية الحديثة</h3>
-            <p>توثيق التحولات السياسية والاجتماعية الدراماتيكية في القرنين الأخيرين، وصياغة الوعي القومي المعاصر في وجه التحديات.</p>
+            <h3>الذاكرة الحية</h3>
+            <p>توثيق تاريخ الصمود الحديث، من فترات الانتداب الفرنسي إلى التحولات الكبرى التي صاغت هوية ديريك اليوم.</p>
         </a>
     </div>
 
     <footer>
-        <div class="footer-sec">
-            <h4>LOCATION</h4>
-            <p>Zagros Mountains / Erbil / Amed / Dêrik</p>
-        </div>
-        <div class="footer-sec">
-            <h4>CONTACT</h4>
-            <p>archive@derk-history.com</p>
-            <p>+964 (0) 750 000 0000</p>
-        </div>
-        <div class="footer-sec">
-            <h4>SOCIALS</h4>
-            <a href="#">Instagram</a>
-            <a href="#">Twitter</a>
-            <a href="#">LinkedIn</a>
-        </div>
-        <div class="copyright">
-            © 2026 DÊRK DIGITAL SOLUTIONS. ALL RIGHTS RESERVED.
-        </div>
+        <div style="font-family: 'Orbitron'; margin-bottom: 10px;">DÊRK . DIGITAL SOLUTIONS // ZAGROS HIGHLANDS</div>
+        © 2026 تم التدوين بواسطة أرشيف المدن العريقة. جميع الحقوق محفوظة.
     </footer>
 
     <script>
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
-
         let width, height, flakes = [];
 
-        // إعداد الكانفاس والجزيئات
         function init() {
             width = window.innerWidth;
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
-
             flakes = [];
-            for (let i = 0; i < 150; i++) { // عدد رقائق الثلج
+            for (let i = 0; i < 150; i++) {
                 flakes.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    size: Math.random() * 2 + 1, // الحجم
-                    speed: Math.random() * 1 + 0.5, // سرعة السقوط
-                    opacity: Math.random() * 0.6 // الشفافية
+                    size: Math.random() * 2 + 1,
+                    speed: Math.random() * 1 + 0.5,
+                    opacity: Math.random() * 0.6
                 });
             }
         }
 
-        // رسم وتحريك الثلج
         function draw() {
             ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // لون الثلج
-            
+            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
             flakes.forEach(f => {
                 ctx.beginPath();
                 ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
                 ctx.fill();
-
-                // تحريك للأسفل
                 f.y += f.speed;
-
-                // إعادة الرقاقة للأعلى إذا خرجت من الشاشة
                 if (f.y > height) {
                     f.y = -10;
                     f.x = Math.random() * width;
@@ -333,10 +320,7 @@
             requestAnimationFrame(draw);
         }
 
-        // إعادة ضبط الحجم عند تغيير حجم النافذة
         window.addEventListener('resize', init);
-
-        // تشغيل البداية
         init();
         draw();
     </script>
