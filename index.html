@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DÊRK | حارسة الجسر والأرشيف الحي</title>
+    <title>Dêrk | أرشيف حضارة الشمس</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+Arabic:wght@300;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+Arabic:wght@300;700&display=swap');
 
         :root {
-            --primary-color: #00f2ff; /* لون النيون الفسفوري (الشهاب) */
+            --primary-color: #00f2ff; /* لون الشهاب الفسفوري */
             --bg-dark: #050505;
-            --text-gray: #a0a0a0;
-            --card-overlay: rgba(0, 0, 0, 0.85); /* تظليل داكن جداً فوق الصور */
+            --card-bg: rgba(13, 13, 13, 0.9);
+            --text-gray: #777;
         }
 
         body {
@@ -23,42 +23,37 @@
             position: relative;
         }
 
-        /* --- تأثير تساقط الثلج (Fixed Background) --- */
+        /* --- تأثير تساقط الثلج الخلفي --- */
         #snow-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 1; /* خلف المحتوى الأساسي */
+            z-index: 1;
         }
 
-        /* --- المحتوى الأساسي (Foreground) --- */
+        /* --- المحتوى --- */
         header, .hero, .grid-container, footer {
             position: relative;
-            z-index: 2; /* فوق الثلج */
+            z-index: 2;
         }
 
         header {
-            padding: 30px 10%;
+            padding: 40px 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background-color: rgba(5, 5, 5, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .logo {
             font-family: 'Orbitron', sans-serif;
             font-size: 2.2rem;
             font-weight: bold;
-            color: white;
             letter-spacing: 5px;
+            color: white;
         }
         .logo span { color: var(--primary-color); }
 
-        /* Hero Section */
         .hero {
             height: 50vh;
             display: flex;
@@ -66,160 +61,107 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle at center, #111 0%, #050505 100%);
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
-            font-weight: 800;
-            margin-bottom: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
             letter-spacing: 15px;
-            background: linear-gradient(to bottom, #fff, #444);
+            margin: 0;
+            background: linear-gradient(to bottom, #fff, #333);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             color: var(--text-gray);
-            max-width: 700px;
-            font-size: 1.2rem;
-            line-height: 1.8;
-            font-weight: 300;
+            max-width: 600px;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            letter-spacing: 1px;
         }
 
-        /* --- الخانات التفاعلية (The Grid) --- */
+        /* --- الشبكة التفاعلية --- */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             padding: 60px 10%;
-            background-color: var(--bg-dark);
         }
 
         .card {
-            border-radius: 4px;
+            background: var(--card-bg);
+            padding: 60px 40px;
+            border: 1px solid #151515;
             position: relative;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid #1a1a1a;
             text-decoration: none;
-            display: block;
-            overflow: hidden; /* ضروري لتأثير الشهاب وتكبير الصورة */
-            height: 350px; /* طول موحد للخانات */
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
         }
 
-        /* --- خلفيات الصور عالية الدقة (مظللة) --- */
-        .card-bg-img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.6s ease;
-            z-index: -2; /* خلف التظليل والنص */
-        }
-
-        /* التظليل الداكن الثابت فوق الصورة */
-        .card-shadow {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--card-overlay);
-            z-index: -1; /* خلف النص */
-            transition: 0.5s;
-        }
-
-        /* --- تفاصيل تأثير التمرير (Hover) --- */
         .card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px);
             border-color: var(--primary-color);
-            box-shadow: 0 0 50px rgba(0, 242, 255, 0.15);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
         }
 
-        /* تكبير الصورة الخلفية عند التمرير */
-        .card:hover .card-bg-img {
-            transform: scale(1.1);
-        }
-
-        /* تخفيف التظليل قليلاً عند التمرير لإظهار الصورة */
-        .card:hover .card-shadow {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        /* --- تأثير الوميض السحري (الشهاب) عند الضغط --- */
+        /* --- تأثير الوميض الشهابي عند الضغط --- */
         .card:active {
-            animation: meteorFlash 0.5s ease-out;
+            animation: flashImpact 0.4s ease-out;
         }
 
-        @keyframes meteorFlash {
-            0% { box-shadow: 0 0 0px var(--primary-color); }
-            20% {
-                background-color: var(--primary-color); /* الوميض يغمر الخانة */
-                box-shadow: 0 0 80px var(--primary-color);
-            }
-            100% { box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); }
-        }
-
-        /* --- محتوى النص داخل الخانة --- */
-        .card-content {
-            position: relative;
-            padding: 60px 40px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end; /* النص في الأسفل */
-            z-index: 2;
+        @keyframes flashImpact {
+            0% { background: var(--card-bg); }
+            20% { background: var(--primary-color); box-shadow: 0 0 100px var(--primary-color); }
+            100% { background: var(--card-bg); }
         }
 
         .card-number {
             position: absolute;
-            top: 30px;
-            right: 30px;
+            top: 20px; right: 20px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.03); /* باهتة جداً */
+            font-size: 2.5rem;
+            color: #111;
             transition: 0.4s;
         }
 
-        .card:hover .card-number {
-            color: rgba(0, 242, 255, 0.1);
-        }
+        .card:hover .card-number { color: rgba(0, 242, 255, 0.1); }
 
         .card-line {
-            width: 50px;
-            height: 3px;
+            width: 40px; height: 2px;
             background: var(--primary-color);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             transition: 0.4s;
         }
 
-        .card:hover .card-line { width: 80px; }
+        .card:hover .card-line { width: 70px; }
 
         .card h3 {
-            font-size: 2.2rem;
-            margin: 0 0 20px;
-            color: #fff;
-            font-weight: 800;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 700;
         }
 
         .card p {
-            color: #d0d0d0; /* لون فاتح قليلاً ليظهر فوق الصورة */
+            color: #666;
+            font-size: 0.95rem;
             line-height: 1.8;
-            font-size: 1.05rem;
-            font-weight: 400;
-            margin: 0;
+            transition: 0.4s;
         }
 
-        /* Footer */
+        .card:hover p { color: #aaa; }
+
         footer {
-            padding: 80px 10% 50px;
-            background: #000;
+            padding: 80px 10%;
             text-align: center;
-            border-top: 1px solid #1a1a1a;
-            font-size: 0.9rem;
-            color: #444;
-            letter-spacing: 2px;
+            border-top: 1px solid #111;
+            color: #333;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
         }
-
     </style>
 </head>
 <body>
@@ -227,59 +169,49 @@
     <canvas id="snow-canvas"></canvas>
 
     <header>
-        <div class="logo">DÊRK<span>.</span></div>
-        <div style="font-size: 0.75rem; letter-spacing: 3px; color: var(--text-gray); font-family: 'Orbitron';">HIGH ARCHIVE // TRIPLE BORDER</div>
+        <div class="logo">Dêrk<span>.</span></div>
+        <div style="font-family: 'Orbitron'; font-size: 0.7rem; color: #444; letter-spacing: 2px;">DIGITAL_ARCHIVE_v3.0</div>
     </header>
 
     <section class="hero">
-        <h1>دِيـرِيـك</h1>
-        <p>بوابة رقمية تفاعلية لاستكشاف أعماق "المثلث الذهبي"، حارسة نهر دجلة والذاكرة الحية لثلاث حدود. تدوين التاريخ، حماية الهوية.</p>
+        <h1>Dêrk</h1>
+        <p>أرشيف رقمي تفاعلي يوثق عراقة "المثلث الذهبي" وحروب الصمود وتاريخ مدينة الشمس.</p>
     </section>
 
     <div class="grid-container">
         
         <a href="article.html" class="card">
-            <div class="card-bg-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ea/Ain_Diwar_bridge_1.jpg');"></div>
-            <div class="card-shadow"></div>
-            
-            <div class="card-content">
-                <div class="card-number">01</div>
-                <div class="card-line"></div>
-                <h3>حارسة الجسر</h3>
-                <p>استكشاف "عين ديوار" والجسر الروماني الأثري الذي صمد لآلاف السنين كشاهد على عبور الحضارات وقوافل التاريخ.</p>
-            </div>
+            <div class="card-number">01</div>
+            <div class="card-line"></div>
+            <h3>جغرافيا الحدود</h3>
+            <p>تحليل النقطة التي تتعانق فيها ثلاث دول، وأسرار نهر دجلة الذي يروي حكاية ديريك الأبدية.</p>
         </a>
 
         <a href="article.html" class="card">
-            <div class="card-bg-img" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/d/d4/Derik_church.jpg');"></div>
-            <div class="card-shadow"></div>
-            
-            <div class="card-content">
-                <div class="card-number">02</div>
-                <div class="card-line"></div>
-                <h3>نسيج العيش</h3>
-                <p>توثيق العيش المشترك الفريد بين الكورد، السريان، الأرمن، والعرب. ديريك هي لوحة فسيفسائية نادرة.</p>
-            </div>
+            <div class="card-number">02</div>
+            <div class="card-line"></div>
+            <h3>أرواح صامدة</h3>
+            <p>تدوين ملاحم الصمود الشعبي عبر العصور، من فترات الانتداب إلى العصر الحديث.</p>
         </a>
 
         <a href="article.html" class="card">
             <div class="card-number">03</div>
             <div class="card-line"></div>
-            <h3>قلب دجلة</h3>
-            <p>تحليل الجغرافيا السياسية الفريدة للمدينة بصفتها النقطة التي تتعانق فيها حدود سوريا والعراق وتركيا.</p>
+            <h3>مخطوطات العيش</h3>
+            <p>كيف صاغت ديريك لوحة العيش المشترك بين الكورد والسريان والأرمن والعرب في سيمفونية واحدة.</p>
         </a>
 
         <a href="article.html" class="card">
             <div class="card-number">04</div>
             <div class="card-line"></div>
-            <h3>الذاكرة الحية</h3>
-            <p>توثيق تاريخ الصمود الحديث، من فترات الانتداب الفرنسي إلى التحولات الكبرى التي صاغت هوية ديريك اليوم.</p>
+            <h3>كنز الأجداد</h3>
+            <p>رحلة في أعماق "عين ديوار" والجسر الروماني، حيث تتحدث الحجارة لغة التاريخ القديم.</p>
         </a>
+
     </div>
 
     <footer>
-        <div style="font-family: 'Orbitron'; margin-bottom: 10px;">DÊRK . DIGITAL SOLUTIONS // ZAGROS HIGHLANDS</div>
-        © 2026 تم التدوين بواسطة أرشيف المدن العريقة. جميع الحقوق محفوظة.
+        © 2026 DÊRK DIGITAL SOLUTIONS . ALL RECORDS PROTECTED
     </footer>
 
     <script>
@@ -288,42 +220,32 @@
         let width, height, flakes = [];
 
         function init() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
+            width = window.innerWidth; height = window.innerHeight;
+            canvas.width = width; canvas.height = height;
             flakes = [];
             for (let i = 0; i < 150; i++) {
                 flakes.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    size: Math.random() * 2 + 1,
-                    speed: Math.random() * 1 + 0.5,
-                    opacity: Math.random() * 0.6
+                    x: Math.random() * width, y: Math.random() * height,
+                    size: Math.random() * 2 + 1, speed: Math.random() * 0.8 + 0.3,
+                    opacity: Math.random() * 0.5
                 });
             }
         }
 
         function draw() {
             ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+            ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
             flakes.forEach(f => {
-                ctx.beginPath();
-                ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2); ctx.fill();
                 f.y += f.speed;
-                if (f.y > height) {
-                    f.y = -10;
-                    f.x = Math.random() * width;
-                }
+                if (f.y > height) f.y = -10;
             });
             requestAnimationFrame(draw);
         }
 
         window.addEventListener('resize', init);
-        init();
-        draw();
+        init(); draw();
     </script>
-
 </body>
 </html>
+
