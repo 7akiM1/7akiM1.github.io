@@ -130,7 +130,7 @@
         /* معلومات مثيرة (Grid) */
         .info-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin: 40px 0;
         }
@@ -143,26 +143,26 @@
 
         .info-card strong { color: var(--neon-blue); display: block; margin-bottom: 5px; }
 
-        /* معرض الصور */
+        /* معرض الصور المطور */
         .gallery {
-            margin-top: 80px;
+            margin-top: 50px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
         .gallery-item {
             position: relative;
+            height: 250px;
             overflow: hidden;
-            border-radius: 5px;
-            cursor: pointer;
+            border: 1px solid #222;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: 0.5s;
+            transition: 0.5s ease;
         }
 
         .gallery-item:hover img {
@@ -172,16 +172,11 @@
         .gallery-item .overlay {
             position: absolute;
             bottom: 0; left: 0; width: 100%;
-            padding: 20px;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            color: white;
-            font-size: 1rem;
-            opacity: 0;
-            transition: 0.5s;
-        }
-
-        .gallery-item:hover .overlay {
-            opacity: 1;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+            text-align: center;
         }
 
         footer {
@@ -190,6 +185,7 @@
             color: #444;
             font-size: 0.8rem;
             letter-spacing: 2px;
+            border-top: 1px solid #111;
         }
     </style>
 </head>
@@ -199,7 +195,7 @@
 
     <header>
         <a href="index.html" class="back-btn">← العودة للأرشيف</a>
-        <div style="font-family: 'Orbitron';">DÊRK . ARCHIVE</div>
+        <div style="font-family: 'Orbitron'; letter-spacing: 2px;">DÊRK . ARCHIVE</div>
     </header>
 
     <section class="article-hero">
@@ -209,63 +205,53 @@
 
     <article>
         <div class="quote-box">
-            "حيث يلتقي دجلة بالجبال، وحيث تتعانق ثلاث حدود، تقف ديريك (المالكية) كحارس أبدي للتاريخ السوري الكوردي، مدينةٌ لم تنحنِ للريح يوماً."
+            "حيث يلتقي دجلة بالجبال، وحيث تتعانق ثلاث حدود، تقف ديريك (المالكية) كحارس أبدي للتاريخ السوري الكوردي."
         </div>
 
         <h2>الجغرافيا الملحمية</h2>
         <p>
-            تقع ديريك في أقصى الشمال الشرقي من سوريا، وتعتبر قلب "الجزيرة" النابض. ما يميزها عالمياً هو موقعها الاستراتيجي الفريد؛ فهي النقطة التي تلتقي فيها حدود سوريا وتركيا والعراق. يمر بجانبها نهر دجلة العظيم، وتطل عليها جبال "جودي" الشاهقة، مما جعلها مطمعاً وممراً للقوافل والحضارات عبر العصور.
+            تقع ديريك في أقصى الشمال الشرقي من سوريا، وتعتبر قلب "الجزيرة" النابض. ما يميزها عالمياً هو موقعها الاستراتيجي الفريد؛ فهي النقطة التي تلتقي فيها حدود سوريا وتركيا والعراق. يمر بجانبها نهر دجلة العظيم، وتطل عليها جبال "جودي" الشاهقة.
         </p>
 
         <h2>تاريخ الصمود والحروب</h2>
         <p>
-            شهدت ديريك مخاضات عسيرة؛ من فترات الانتداب الفرنسي إلى الصراعات الإقليمية الحديثة. خلال الحرب السورية الأخيرة، تحولت ديريك إلى قلعة حصينة وملاذ آمن لآلاف النازحين. خاضت المدينة معارك صامتة وأخرى معلنة للحفاظ على نسيجها الاجتماعي المتنوع (كورد، سريان، عرب، وأرمن)، حيث أثبتت ديريك أن "العيش المشترك" هو أقوى سلاح في وجه المدافع.
+            شهدت ديريك مخاضات عسيرة؛ من فترات الانتداب الفرنسي إلى الصراعات الإقليمية الحديثة. خاضت المدينة معارك صامتة وأخرى معلنة للحفاظ على نسيجها الاجتماعي المتنوع (كورد، سريان، عرب، وأرمن)، حيث أثبتت ديريك أن "العيش المشترك" هو هويتها الحقيقية.
         </p>
 
         <div class="info-grid">
             <div class="info-card">
                 <strong>التسمية</strong>
-                تعني باللغة الكوردية "الدير الصغير" نسبة إلى دير قديم، وتم تعريبها لاحقاً إلى "المالكية".
+                تعني باللغة الكوردية "الدير الصغير" نسبة إلى دير قديم.
             </div>
             <div class="info-card">
                 <strong>الذهب الأسود</strong>
-                تحيط بها أهم حقول النفط في سوريا (رميلان)، مما يجعلها عموداً فقرياً للاقتصاد.
-            </div>
-            <div class="info-card">
-                <strong>المناخ</strong>
-                تتميز بشتاء قارس وتساقط كثيف للثلوج يغطي سهولها المنبسطة وجبالها المحيطة.
+                تحيط بها أهم حقول النفط في سوريا (رميلان).
             </div>
             <div class="info-card">
                 <strong>عين ديوار</strong>
-                على بعد كيلومترات منها، يقف الجسر الروماني الأثري شاهداً على مرور آلاف السنين.
+                يقف فيها الجسر الروماني الأثري شاهداً على مرور آلاف السنين.
             </div>
         </div>
-
-        <h2>معلومات مثيرة</h2>
-        <p>
-            هل تعلم أن ديريك هي أول منطقة في سوريا تستقبل خيوط الشمس كل صباح؟ وهل تعلم أنها المدينة الوحيدة التي يمكنك فيها الوقوف على تلة ورؤية جبال دولتين أخريين بوضوح تام؟ إنها مدينة التناقضات الجميلة، حيث تجد بساطة الريف وتطور الفكر الثقافي والسياسي في آن واحد.
-        </p>
 
         <h2>معرض الصور الأثرية</h2>
         <div class="gallery">
             <div class="gallery-item">
-                <img src="ancient-bridge.jpg" alt="الجسر الروماني">
-                <div class="overlay">الجسر الروماني الأثري في عين ديوار</div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Ain_Diwar_bridge_1.jpg" alt="جسر عين ديوار">
+                <div class="overlay">الجسر الروماني الأثري - عين ديوار</div>
             </div>
             <div class="gallery-item">
-                <img src="old-church.jpg" alt="الكنيسة القديمة">
-                <div class="overlay">كنيسة سريانية قديمة في قلب ديريك</div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Derik_church.jpg" alt="كنيسة ديريك">
+                <div class="overlay">كنيسة سريانية عريقة في قلب المدينة</div>
             </div>
             <div class="gallery-item">
-                <img src="traditional-market.jpg" alt="السوق التقليدي">
-                <div class="overlay">السوق الشعبي التقليدي، نبض المدينة اليومي</div>
+                <img src="https://live.staticflickr.com/65535/51139456488_6b7e09867b_b.jpg" alt="طبيعة ديريك">
+                <div class="overlay">جمال ريف المالكية الطبيعي</div>
             </div>
             <div class="gallery-item">
-                <img src="landscape.jpg" alt="المناظر الطبيعية">
-                <div class="overlay">المناظر الطبيعية الخلابة المحيطة بديريك</div>
+                <img src="https://live.staticflickr.com/7161/6401659359_3a504a5e2d_b.jpg" alt="نهر دجلة">
+                <div class="overlay">نهر دجلة - الحدود المثلثة</div>
             </div>
         </div>
-
     </article>
 
     <footer>
@@ -273,7 +259,6 @@
     </footer>
 
     <script>
-        // محرك الثلج الخاص بديريك
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, flakes = [];
@@ -282,10 +267,10 @@
             width = window.innerWidth; height = window.innerHeight;
             canvas.width = width; canvas.height = height;
             flakes = [];
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 120; i++) {
                 flakes.push({
                     x: Math.random() * width, y: Math.random() * height,
-                    size: Math.random() * 3 + 1, speed: Math.random() * 1 + 0.5,
+                    size: Math.random() * 2 + 1, speed: Math.random() * 1 + 0.5,
                     opacity: Math.random() * 0.5
                 });
             }
