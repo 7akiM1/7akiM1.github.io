@@ -8,9 +8,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Noto+Sans+Arabic:wght@300;700&display=swap');
 
         :root {
-            --primary-color: #00f2ff; /* لون النيون الفسفوري */
+            --primary-color: #00f2ff; 
             --bg-dark: #050505;
-            --card-bg: #0d0d0d;
+            --card-bg: rgba(13, 13, 13, 0.8);
             --text-gray: #a0a0a0;
         }
 
@@ -20,210 +20,201 @@
             font-family: 'Noto Sans Arabic', sans-serif;
             margin: 0;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Header Layout */
+        /* --- تأثير تساقط الثلج --- */
+        #snow-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* لكي لا يمنع الضغط على الأزرار */
+            z-index: 1;
+        }
+
+        header, .hero, .grid-container, footer {
+            position: relative;
+            z-index: 2; /* لجعل المحتوى فوق الثلج */
+        }
+
         header {
             padding: 40px 10%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo {
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
-            font-weight: bold;
-            color: white;
             letter-spacing: 5px;
         }
-
         .logo span { color: var(--primary-color); }
 
-        /* Hero Section */
         .hero {
-            height: 60vh;
+            height: 50vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: radial-gradient(circle at center, #111 0%, #050505 100%);
         }
 
         .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 10px;
+            font-size: clamp(2rem, 8vw, 4rem);
+            letter-spacing: 15px;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff, #444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero p {
-            color: var(--text-gray);
-            max-width: 600px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* Services / History Grid */
+        /* --- الخانات مع تأثير الوميض --- */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 80px 10%;
-            background: #050505;
+            gap: 25px;
+            padding: 50px 10%;
         }
 
         .card {
             background: var(--card-bg);
             padding: 50px 40px;
-            border-radius: 5px;
+            border-radius: 2px;
             position: relative;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
             border: 1px solid #1a1a1a;
-            text-decoration: none; /* لإزالة خط الرابط */
-            display: block;
+            text-decoration: none;
+            overflow: hidden; /* ضروري لتأثير الشهاب الداخلي */
         }
 
         .card:hover {
-            transform: translateY(-10px);
             border-color: var(--primary-color);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.05);
+        }
+
+        /* تأثير الوميض (الشهاب) عند الضغط */
+        .card:active {
+            animation: flash 0.4s ease-out;
+        }
+
+        @keyframes flash {
+            0% { background: var(--card-bg); box-shadow: 0 0 0px var(--primary-color); }
+            50% { background: var(--primary-color); box-shadow: 0 0 50px var(--primary-color); }
+            100% { background: var(--card-bg); }
         }
 
         .card-number {
             position: absolute;
-            top: 30px;
-            right: 30px;
+            top: 20px;
+            right: 20px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #1a1a1a;
-            transition: 0.4s;
         }
 
-        .card:hover .card-number {
-            color: rgba(0, 242, 255, 0.2);
-        }
+        .card h3 { font-size: 1.6rem; margin: 20px 0; color: #fff; }
+        .card p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.7; }
 
-        .card-line {
-            width: 40px;
-            height: 3px;
-            background: var(--primary-color);
-            margin-bottom: 30px;
-        }
-
-        .card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #fff;
-        }
-
-        .card p {
-            color: var(--text-gray);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* Footer */
         footer {
-            padding: 100px 10% 50px;
-            background: #000;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            padding: 60px 10%;
             border-top: 1px solid #1a1a1a;
-        }
-
-        .footer-sec h4 {
-            color: white;
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
             font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            color: #444;
         }
-
-        .footer-sec p, .footer-sec a {
-            color: var(--text-gray);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .copyright {
-            grid-column: 1 / span 3;
-            text-align: center;
-            margin-top: 80px;
-            color: #333;
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-        }
-
     </style>
 </head>
 <body>
 
+    <canvas id="snow-canvas"></canvas>
+
     <header>
         <div class="logo">DÊRK<span>.</span></div>
-        <div style="font-size: 0.8rem; letter-spacing: 3px;">HISTORY / ARCHIVE / 2026</div>
+        <div style="font-size: 0.7rem; letter-spacing: 2px; color: var(--text-gray);">ARCHIVE // KURDISH HISTORY</div>
     </header>
 
     <section class="hero">
-        <h1>كنز ميديا</h1>
-        <p>بوابة رقمية لاستكشاف أعماق التاريخ الكوردي، من جبال زاغروس إلى فجر الحضارات. تدوين الذاكرة، حماية الهوية.</p>
+        <h1>كـنـز مـيـديـا</h1>
+        <p style="color: var(--text-gray); max-width: 700px;">أرشيف رقمي يوثق عظمة العصور الكوردية. اضغط على الحقبة لفتح بوابة التاريخ.</p>
     </section>
 
     <div class="grid-container">
         <a href="article.html" class="card">
             <div class="card-number">01</div>
-            <div class="card-line"></div>
             <h3>الممالك القديمة</h3>
-            <p>تحليل عميق لإمبراطورية ميديا والجذور الأولى التي صاغت وجه الشرق القديم. استكشاف الأساطير والحقائق.</p>
+            <p>من الميديين إلى جوتيوم، حيث بدأت أولى أنفاس الحضارة في الجبال.</p>
         </a>
-
         <a href="article.html" class="card">
             <div class="card-number">02</div>
-            <div class="card-line"></div>
             <h3>العصر الذهبي</h3>
-            <p>عندما أضاءت العقول الكوردية دروب الفلسفة والطب والفروسية. عصر القادة والعلماء الذين غيروا مجرى التاريخ.</p>
+            <p>مخطوطات العلماء وقصص القادة الذين صاغوا ملاحم الشرق العظيم.</p>
         </a>
-
         <a href="article.html" class="card">
             <div class="card-number">03</div>
-            <div class="card-line"></div>
-            <h3>المخطوطات الضائعة</h3>
-            <p>بحث في الأدب الكلاسيكي، الشعر، واللغة التي صمدت لآلاف السنين كحصن منيع للهوية الثقافية.</p>
+            <h3>الأدب العريق</h3>
+            <p>الذاكرة الشعرية واللغة التي حُفرت في الصخر قبل أن تُكتب على الورق.</p>
         </a>
-
         <a href="article.html" class="card">
             <div class="card-number">04</div>
-            <div class="card-line"></div>
-            <h3>الهوية الحديثة</h3>
-            <p>توثيق التحولات السياسية والاجتماعية في القرنين الأخيرين، وصياغة الوعي القومي المعاصر.</p>
+            <h3>فجر الهوية</h3>
+            <p>استكشاف النهضة الحديثة وكيف حافظت الأمة على روحها عبر الزمن.</p>
         </a>
     </div>
 
     <footer>
-        <div class="footer-sec">
-            <h4>LOCATION</h4>
-            <p>Zagros Mountains / Erbil / Amed</p>
-        </div>
-        <div class="footer-sec">
-            <h4>CONTACT</h4>
-            <p>archive@derk-history.com</p>
-            <p>+964 (0) 750 000 0000</p>
-        </div>
-        <div class="footer-sec">
-            <h4>SOCIALS</h4>
-            <a href="#">Instagram</a>
-            <a href="#">Twitter</a>
-            <a href="#">LinkedIn</a>
-        </div>
-        <div class="copyright">
-            © 2026 DÊRK DIGITAL SOLUTIONS. ALL RIGHTS RESERVED.
-        </div>
+        <div>© 2026 DÊRK DIGITAL SOLUTIONS</div>
+        <div>ZAGROS MOUNTAINS / HIGH ARCHIVE</div>
     </footer>
 
+    <script>
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height, flakes = [];
+
+        function init() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            flakes = [];
+            for (let i = 0; i < 150; i++) {
+                flakes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 2 + 1,
+                    speed: Math.random() * 1 + 0.5,
+                    opacity: Math.random() * 0.5
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+            
+            flakes.forEach(f => {
+                ctx.beginPath();
+                ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                f.y += f.speed;
+                if (f.y > height) f.y = -10;
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        draw();
+    </script>
 </body>
 </html>
