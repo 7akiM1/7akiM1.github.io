@@ -22,7 +22,6 @@
             overflow-x: hidden;
         }
 
-        /* تأثير الثلج في الخلفية */
         #snow-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -30,7 +29,6 @@
             z-index: 0;
         }
 
-        /* الهيدر */
         header {
             padding: 30px 10%;
             display: flex;
@@ -47,144 +45,99 @@
             color: var(--neon-blue);
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
             transition: 0.3s;
         }
 
-        .back-btn:hover { text-shadow: 0 0 10px var(--neon-blue); }
-
-        /* العنوان الرئيسي */
         .article-hero {
-            height: 60vh;
+            height: 40vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(to bottom, transparent, var(--deep-black)), 
-                        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070') center/cover;
-            position: relative;
+            background: radial-gradient(circle, #111 0%, #050505 100%);
+            border-bottom: 1px solid #1a1a1a;
         }
 
         .article-hero h1 {
             font-size: clamp(3rem, 10vw, 5rem);
             font-weight: 800;
+            letter-spacing: 15px;
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
             margin: 0;
-            letter-spacing: 10px;
-            text-shadow: 0 0 30px rgba(0, 242, 255, 0.5);
         }
 
-        .subtitle {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-blue);
-            letter-spacing: 5px;
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-
-        /* محتوى المقال */
         article {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 80px 20px;
+            padding: 60px 20px;
             position: relative;
             z-index: 1;
         }
 
         .quote-box {
-            border-right: 5px solid var(--neon-blue);
-            background: rgba(255, 255, 255, 0.03);
+            border-right: 4px solid var(--neon-blue);
+            background: rgba(0, 242, 255, 0.03);
             padding: 30px;
-            font-size: 1.4rem;
-            font-weight: 300;
+            font-size: 1.3rem;
             margin-bottom: 50px;
-            line-height: 2;
         }
 
         h2 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: white;
-            border-bottom: 1px solid #222;
-            padding-bottom: 15px;
-            margin-top: 60px;
+            margin-top: 50px;
             display: flex;
             align-items: center;
         }
 
         h2::before {
-            content: "0x";
-            font-family: 'Orbitron';
-            font-size: 1rem;
+            content: "//";
             color: var(--neon-blue);
-            margin-left: 15px;
+            margin-left: 10px;
+            font-family: 'Orbitron';
         }
 
         p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--text-silver);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: justify;
         }
 
-        /* معلومات مثيرة (Grid) */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .info-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border: 1px dashed #444;
-        }
-
-        .info-card strong { color: var(--neon-blue); display: block; margin-bottom: 5px; }
-
-        /* معرض الصور المطور */
-        .gallery {
-            margin-top: 50px;
+        /* بطاقات الحقائق (بديلة للصور) */
+        .fact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
+            margin-top: 40px;
         }
 
-        .gallery-item {
+        .fact-card {
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            padding: 30px;
+            transition: 0.3s;
             position: relative;
-            height: 250px;
             overflow: hidden;
-            border: 1px solid #222;
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.5s ease;
+        .fact-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-item .overlay {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%;
-            padding: 15px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+        .fact-card h4 {
             color: var(--neon-blue);
-            font-size: 0.9rem;
-            text-align: center;
+            margin-top: 0;
+            font-family: 'Orbitron';
+            letter-spacing: 2px;
         }
 
         footer {
             text-align: center;
-            padding: 100px 0;
-            color: #444;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
+            padding: 60px;
+            color: #333;
             border-top: 1px solid #111;
         }
     </style>
@@ -194,68 +147,46 @@
     <canvas id="snow-canvas"></canvas>
 
     <header>
-        <a href="index.html" class="back-btn">← العودة للأرشيف</a>
-        <div style="font-family: 'Orbitron'; letter-spacing: 2px;">DÊRK . ARCHIVE</div>
+        <a href="index.html" class="back-btn">← عودة</a>
+        <div style="font-family: 'Orbitron'; color: var(--neon-blue);">DÊRK ARCHIVE</div>
     </header>
 
     <section class="article-hero">
         <h1>دِيـرِيـك</h1>
-        <div class="subtitle">THE CITY OF SUNRISE</div>
+        <div style="font-family: 'Orbitron'; letter-spacing: 5px; color: #444;">DATA ENTRY: 2026</div>
     </section>
 
     <article>
         <div class="quote-box">
-            "حيث يلتقي دجلة بالجبال، وحيث تتعانق ثلاث حدود، تقف ديريك (المالكية) كحارس أبدي للتاريخ السوري الكوردي."
+            "ديريك ليست مجرد نقطة على الخارطة، بل هي ملتقى الأرواح والحدود، حيث يهمس نهر دجلة بأسرار الحضارات العابرة."
         </div>
 
-        <h2>الجغرافيا الملحمية</h2>
+        <h2>الجغرافيا والتاريخ</h2>
         <p>
-            تقع ديريك في أقصى الشمال الشرقي من سوريا، وتعتبر قلب "الجزيرة" النابض. ما يميزها عالمياً هو موقعها الاستراتيجي الفريد؛ فهي النقطة التي تلتقي فيها حدود سوريا وتركيا والعراق. يمر بجانبها نهر دجلة العظيم، وتطل عليها جبال "جودي" الشاهقة.
+            تقع ديريك (المالكية) في أقصى الشمال الشرقي السوري، متميزة بموقعها كـ "مثلث ذهبي" يربط ثلاث دول. تاريخها ضارب في القدم، حيث شهدت مرور الإمبراطوريات الكبرى وصولاً إلى العصر الحديث، محافظة على نسيجها الفريد الذي يجمع الكورد والسريان والأرمن والعرب في تناغم قل نظيره.
         </p>
 
-        <h2>تاريخ الصمود والحروب</h2>
-        <p>
-            شهدت ديريك مخاضات عسيرة؛ من فترات الانتداب الفرنسي إلى الصراعات الإقليمية الحديثة. خاضت المدينة معارك صامتة وأخرى معلنة للحفاظ على نسيجها الاجتماعي المتنوع (كورد، سريان، عرب، وأرمن)، حيث أثبتت ديريك أن "العيش المشترك" هو هويتها الحقيقية.
-        </p>
-
-        <div class="info-grid">
-            <div class="info-card">
-                <strong>التسمية</strong>
-                تعني باللغة الكوردية "الدير الصغير" نسبة إلى دير قديم.
+        <h2>حقائق الأرشيف</h2>
+        <div class="fact-grid">
+            <div class="fact-card">
+                <h4>LOCATION</h4>
+                <p>أول مدينة سورية تستقبل خيوط الشمس يومياً، وتقع على مفترق طرق حضاري وتجاري تاريخي.</p>
             </div>
-            <div class="info-card">
-                <strong>الذهب الأسود</strong>
-                تحيط بها أهم حقول النفط في سوريا (رميلان).
+            <div class="fact-card">
+                <h4>LEGACY</h4>
+                <p>تضم "عين ديوار" والجسر الروماني الذي يعد أحد أهم الأوابد الأثرية الشاهدة على عبقرية البناء القديم.</p>
             </div>
-            <div class="info-card">
-                <strong>عين ديوار</strong>
-                يقف فيها الجسر الروماني الأثري شاهداً على مرور آلاف السنين.
+            <div class="fact-card">
+                <h4>IDENTITY</h4>
+                <p>تعتبر مركزاً ثقافياً حياً، حيث تتعدد اللغات والأديان تحت سماء واحدة، صامدة في وجه كل التحولات.</p>
             </div>
         </div>
 
-        <h2>معرض الصور الأثرية</h2>
-        <div class="gallery">
-            <div class="gallery-item">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Ain_Diwar_bridge_1.jpg" alt="جسر عين ديوار">
-                <div class="overlay">الجسر الروماني الأثري - عين ديوار</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Derik_church.jpg" alt="كنيسة ديريك">
-                <div class="overlay">كنيسة سريانية عريقة في قلب المدينة</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://live.staticflickr.com/65535/51139456488_6b7e09867b_b.jpg" alt="طبيعة ديريك">
-                <div class="overlay">جمال ريف المالكية الطبيعي</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://live.staticflickr.com/7161/6401659359_3a504a5e2d_b.jpg" alt="نهر دجلة">
-                <div class="overlay">نهر دجلة - الحدود المثلثة</div>
-            </div>
-        </div>
+        <p style="margin-top: 50px; text-align: center; color: var(--neon-blue); font-family: 'Orbitron';">--- END OF RECORD ---</p>
     </article>
 
     <footer>
-        © 2026 تم التدوين بواسطة DÊRK DIGITAL SOLUTIONS - أرشيف المدن العريقة
+        © 2026 DÊRK DIGITAL SOLUTIONS
     </footer>
 
     <script>
@@ -267,10 +198,10 @@
             width = window.innerWidth; height = window.innerHeight;
             canvas.width = width; canvas.height = height;
             flakes = [];
-            for (let i = 0; i < 120; i++) {
+            for (let i = 0; i < 100; i++) {
                 flakes.push({
                     x: Math.random() * width, y: Math.random() * height,
-                    size: Math.random() * 2 + 1, speed: Math.random() * 1 + 0.5,
+                    size: Math.random() * 2 + 1, speed: Math.random() * 0.8 + 0.3,
                     opacity: Math.random() * 0.5
                 });
             }
@@ -278,11 +209,9 @@
 
         function draw() {
             ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
+            ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
             flakes.forEach(f => {
-                ctx.beginPath();
-                ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2); ctx.fill();
                 f.y += f.speed;
                 if (f.y > height) f.y = -10;
             });
